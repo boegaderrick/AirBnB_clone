@@ -60,8 +60,10 @@ class FileStorage:
         from models.city import City
         from models.amenity import Amenity
         from models.place import Place
+        from models.review import Review
         class_dict = {'BaseModel': BaseModel, 'User': User, 'State': State,
-                      'City': City, 'Amenity': Amenity, 'Place': Place}
+                      'City': City, 'Amenity': Amenity, 'Place': Place,
+                      'Review': Review}
         if class_name in class_dict:
             return class_dict[class_name]
         print("** class doesn't exist **")

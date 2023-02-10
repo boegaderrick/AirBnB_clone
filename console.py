@@ -4,6 +4,7 @@ import cmd
 import os
 from models.__init__ import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """AirBnB command interpreter class definition"""
     prompt = '(hbnb) '
@@ -17,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
         USAGE: update <ClassName> <id> <attribute name> <attribute value>"""
         temp = args.rsplit()[:4]
         class_name = temp[0] if len(temp) > 0 else None
-        obj_id = temp[1] if len(temp) > 1  else None
+        obj_id = temp[1] if len(temp) > 1 else None
         attr = temp[2] if len(temp) > 2 else None
         if len(temp) > 3:
             if temp[3].startswith('"'):
@@ -31,8 +32,8 @@ class HBNBCommand(cmd.Cmd):
 
         if storage.my_classes(class_name) is None:
             return
-        name_id = f'{class_name} {obj_id}' if obj_id is not None else class_name
-        obj = self.get_obj(name_id)
+        foo = f'{class_name} {obj_id}' if obj_id is not None else class_name
+        obj = self.get_obj(foo)
         if obj is None:
             return
         if attr is None:
@@ -45,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
             a_type = type(getattr(obj, attr))
             value = a_type(value)
         setattr(obj, attr, value)
-        storage.save()
+        obj.save()
 
     def do_all(self, args):
         """Prints list of string representation of stored objects
@@ -88,7 +89,6 @@ class HBNBCommand(cmd.Cmd):
             return storage.objects[obj_key]
         else:
             print("** no instance found **")
-
 
     def do_show(self, args):
         """ Prints string representation of instance specified
