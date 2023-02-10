@@ -8,5 +8,6 @@ The command interpreter is a program that inherits from 'cmd.Cmd'. It's purpose 
  * Search & retrieval of objects
  * Storage management
  * Display of all objects
- * Object modification or update
+ - Object modification or update
+
 To start the interpreter run 'console.py' file at the root of this repo. Type help to see all methods available as at now, you can type 'help [method name]' to get information about the methods available and how to use them.
