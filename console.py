@@ -13,6 +13,57 @@ class HBNBCommand(cmd.Cmd):
         """Object constructor method"""
         super().__init__(completekey, stdin, stdout)
 
+    def onecmd(self, line):
+        """Override for the Cmd.onecmd method to cater for unique commands.
+        If a unique command is passed it is handled accordingly.
+        Cmd.onecmd is called either way.
+        """
+        if line[0].isupper() and all(i in line for i in '.()'):
+            cmd = line[line.index('.')+1:line.index('(')]
+            class_name = line[:line.index('.')]
+            args = line[line.index('(')+1:line.index(')')]
+            if len(args) > 0 and ', ' in args:
+                import ast
+                args = ast.literal_eval(args)
+                if type(args[1]) is dict:
+                    _id = args[0]
+                    for key, value in args[1].items():
+                        if type(value) is str and ' ' in value:
+                            value = '"' + value + '"'
+                        else:
+                            value = str(value)
+                        line = ' '.join((cmd, class_name, _id, key, value))
+                        ret = super().onecmd(line)
+                    return ret
+                if type(args[2]) is str and ' ' in args[2]:
+                    temp = '"' + args[2] + '"'
+                    string = ' '.join(args[i] for i in range(2))
+                    string += ' ' + temp
+                else:
+                    string = ' '.join(str(i) for i in args)
+            else:
+                if args.startswith('"'):
+                    start = args.index('"') + 1
+                    string = args[start:args.index('"', start)]
+                else:
+                    string = args
+            line = cmd + ' ' + class_name + ' ' + string
+            return super().onecmd(line)
+        else:
+            return super().onecmd(line)
+
+    def do_count(self, args):
+        """Displays the count of instances of a specified class in storage
+        USAGE: count [ClassName]
+        USAGE: <ClassName>.count()
+        EXMPL: count BaseModel
+             : BaseModel.count()"""
+        if storage.my_classes(args) is None:
+            return
+        _dict = storage.objects
+        count = sum([1 for key in _dict.keys() if key.startswith(args)])
+        print(count)
+
     def do_update(self, args):
         """Updates instance specified by Class and id
         USAGE: update <ClassName> <id> <attribute name> <attribute value>"""
