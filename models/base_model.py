@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This module contains the base class for AirBnB clone"""
 from datetime import datetime
 from uuid import uuid4
