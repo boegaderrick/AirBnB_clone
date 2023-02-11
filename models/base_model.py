@@ -29,7 +29,7 @@ class BaseModel:
 
     def __str__(self):
         """Returns informal string representation of object"""
-        return (f'[{type(self).__name__}] ({self.id}) {self.__dict__}')
+        return f'[{type(self).__name__}] ({self.id}) {self.__dict__}'
 
     def save(self):
         """This method edits updated_at attr when necessary"""
