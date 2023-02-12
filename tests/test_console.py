@@ -9,6 +9,72 @@ from io import StringIO
 
 class TestHBNBCommand(TestCase):
     """AirBnB console test class"""
+    def test_advanced(self):
+        """Tests advanced commands (example: User.destroy("78787-88678")"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("State.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric)
+            self.assertTrue(int(output) > -1)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Amenity.create()")
+            output = f.getvalue()[:-1]
+            self.assertEqual(36, len(output))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Amenity.show({output})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(out.startswith('['))
+            self.assertTrue(out.endswith('}'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Amenity.destroy({output})")
+            output = f.getvalue()[:-1]
+            self.assertTrue(len(output) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"User.update({output}, 'name', 'ron')")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"User.show({output})")
+            out = f.getvalue()[:-1]
+            string = "'name': 'ron'"
+            self.assertTrue(string in out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Place.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"Place.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Place.update({output}, {{'sex': 'male'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Place.show({output})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(all(i in out for i in _dict.keys()))
+            self.assertTrue(all(str(i) in out for i in _dict.values()))
+
     def test_help(self):
         """Tests output of the help command"""
         with patch('sys.stdout', new=StringIO()) as f:
