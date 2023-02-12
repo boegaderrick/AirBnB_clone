@@ -25,10 +25,9 @@ class TestHBNBCommand(TestCase):
             self.assertEqual(string, f.getvalue())
             print(f.getvalue())
 
-        #with patch('sys.stdout', new=StringIO()) as f:
-        #    HBNBCommand().onecmd("create BaseModel")
-        #    self.assertEqual(36, len(f.getvalue()))
-
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create BaseModel")
+            self.assertEqual(37, len(f.getvalue()))
 
     def test_no_command(self):
         """Tests output of 'no command + enter' or emptyline"""
