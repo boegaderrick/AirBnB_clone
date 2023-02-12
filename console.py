@@ -18,6 +18,9 @@ class HBNBCommand(cmd.Cmd):
         If a unique command is passed it is handled accordingly.
         Cmd.onecmd is called either way.
         """
+        if len(line) < 1 or line is None:
+            return super().onecmd(line)
+
         if line[0].isupper() and all(i in line for i in '.()'):
             cmd = line[line.index('.')+1:line.index('(')]
             class_name = line[:line.index('.')]

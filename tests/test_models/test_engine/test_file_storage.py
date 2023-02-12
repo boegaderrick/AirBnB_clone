@@ -13,3 +13,12 @@ class TestFileStorage(TestCase):
         b = BaseModel()
         f = FileStorage()
         self.assertTrue(b in f.all().values())
+        temp = b.to_dict().copy()
+        del b
+        k = BaseModel(**temp)
+        self.assertEqual(temp, k.to_dict())
+
+    def test_2(self):
+        m = FileStorage()
+        f = FileStorage()
+        self.assertEqual(m.all(), f.all())
