@@ -167,12 +167,15 @@ class HBNBCommand(cmd.Cmd):
         os.system(args)
 
     def do_EOF(self, args):
-        """Handles the EOF condition"""
+        """Exits the program
+        USAGE: ctrl^d
+        USAGE: EOF
+        """
         print()
         return True
 
     def do_quit(self, args):
-        """Ends the program when the command 'quit' is received"""
+        """Quit command to exit the program"""
         return True
 
     def emptyline(self):
