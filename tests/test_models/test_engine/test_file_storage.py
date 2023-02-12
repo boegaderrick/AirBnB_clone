@@ -19,3 +19,15 @@ class TestFileStorage(TestCase):
         self.assertEqual(temp, k.to_dict())
         m = FileStorage()
         self.assertEqual(m.all(), f.all())
+
+    def test_2(self):
+            b = BaseModel()
+            f = FileStorage()
+            b.name = 'new york'
+            f.new(b)
+            f.save()
+            self.assertTrue(b in f.all().values())
+            temp = b.id
+            del b
+            f.reload()
+            self.assertTrue(f'BaseModel.{temp}' in f.objects)
