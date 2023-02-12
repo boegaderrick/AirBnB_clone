@@ -25,3 +25,13 @@ class TestHBNBCommand(TestCase):
             string = ''
             output = f.getvalue()
             self.assertEqual(string, output)
+
+    def test_3(self):
+        """Tests the quit and EOF commands"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit")
+            self.assertEqual('', f.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF")
+            self.assertEqual('\n', f.getvalue())
