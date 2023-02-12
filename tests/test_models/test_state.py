@@ -10,5 +10,5 @@ class TestState(TestCase):
     def test_1(self):
         """Tests State class attributes"""
         s = State()
-        self.assertTrue(len(s.name) ==  0)
+        self.assertTrue(len(s.name) == 0)
         self.assertTrue(type(s.name) is str)
