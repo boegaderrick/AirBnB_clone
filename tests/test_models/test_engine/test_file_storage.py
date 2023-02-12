@@ -12,5 +12,4 @@ class TestFileStorage(TestCase):
         """Performs tests on the FileStorage class"""
         b = BaseModel()
         f = FileStorage()
-        f.all()
-        #self.assertTrue(b in f.all().values())
+        self.assertTrue(b in f.all().values())
