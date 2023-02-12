@@ -12,11 +12,80 @@ class TestHBNBCommand(TestCase):
     def test_help(self):
         """Tests output of the help command"""
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help")
+            output = f.getvalue()
+            string = "\nDocumented commands (type help <topic>):\n\
+========================================\n\
+EOF  all  count  create  destroy  help  quit  shell  show  update\n\n"
+            self.assertEqual(string, output)
+
+        # help count
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help count")
+            output = f.getvalue()
+            string = "Displays the count of instances of a specified \
+class in storage\n\
+        USAGE: count [ClassName]\n\
+        USAGE: <ClassName>.count()\n\
+        EXMPL: count BaseModel\n\
+             : BaseModel.count()\n"
+            self.assertEqual(string, output)
+
+        # help update
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help update")
+            output = f.getvalue()
+            string = "Updates instance specified by Class and id\n\
+        USAGE: update <ClassName> <id> <attribute name> <attribute value>\n"
+            self.assertEqual(string, output)
+
+        # help show
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help show")
             help_show = " Prints string representation of instance specified\n\
         USAGE: show [ClassName] [id]\n"
             output = f.getvalue()
             self.assertEqual(help_show, output)
+
+        # help all
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help all")
+            output = f.getvalue()
+            string = "Prints list of string representation of stored objects\n\
+        USAGE: all [ClassName] - for all instances of specified class\n\
+        USAGE: all - for all instances of all classes\n"
+
+        # help destroy
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help destroy")
+            output = f.getvalue()
+            string = " Destroys/deletes instance/object specified\n\
+        USAGE: destroy [ClassName] [id]\n"
+            self.assertEqual(string, output)
+
+        # help create
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help create")
+            output = f.getvalue()
+            string = "Creates a new instance of a class\n\
+        USAGE: create [ClassName]\n"
+            self.assertEqual(string, output)
+
+        # help quit
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help quit")
+            output = f.getvalue()
+            string = 'Quit command to exit the program\n'
+            self.assertEqual(string, output)
+
+        # help EOF
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help EOF")
+            output = f.getvalue()
+            string = 'Exits the program\n\
+        USAGE: ctrl^d\n\
+        USAGE: EOF\n        \n'
+            self.assertEqual(string, output)
 
     def test_count(self):
         """Tests the count command"""
