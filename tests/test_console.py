@@ -92,14 +92,59 @@ class TestHBNBCommand(TestCase):
             self.assertEqual(output, "** no instance found **")
 
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"BaseModel.update({output}, 'name', 'ron')")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"BaseModel.show({output})")
+            out = f.getvalue()[:-1]
+            string = "'name': 'ron'"
+            self.assertTrue(string in out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("State.show('78786-78787')")
             output = f.getvalue()[:-1]
             self.assertEqual(output, "** no instance found **")
 
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("State.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"State.update({output}, 'name', 'ron')")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"State.show({output})")
+            out = f.getvalue()[:-1]
+            string = "'name': 'ron'"
+            self.assertTrue(string in out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("City.show('78786-78787')")
             output = f.getvalue()[:-1]
             self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"City.update({output}, 'name', 'ron')")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"City.show({output})")
+            out = f.getvalue()[:-1]
+            string = "'name': 'ron'"
+            self.assertTrue(string in out)
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Review.show('78786-78787')")
