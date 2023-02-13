@@ -101,10 +101,25 @@ class TestHBNBCommand(TestCase):
             output = f.getvalue()[:-1]
             self.assertEqual(output, "** no instance found **")
 
-        # with patch('sys.stdout', new=StringIO()) as f:
-        #    HBNBCommand().onecmd("Review.show('78786-78787')")
-        #    output = f.getvalue()[:-1]
-        #    self.assertEqual(output, "** no instance found **")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.show('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Review.update({output}, 'name', 'ron')")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Review.show({output})")
+            out = f.getvalue()[:-1]
+            string = "'name': 'ron'"
+            self.assertTrue(string in out)
 
     def test_advanced_destroy(self):
         """Tests advanced destroy command <class_name>.destroy()"""
