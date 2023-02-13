@@ -9,6 +9,217 @@ from io import StringIO
 
 class TestHBNBCommand(TestCase):
     """AirBnB console test class"""
+    def test_advanced_all(self):
+        """Tests advanced all command <class_name>.all()"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Amenity.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Place.all()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.startswith('['))
+            self.assertTrue(output.endswith(']'))
+
+    def test_advanced_count(self):
+        """Tests advanced count command <class_name>.count()"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric())
+            self.assertGreater(int(output), -1)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric())
+            self.assertGreater(int(output), -1)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("state.count()")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "*** Unknown syntax: state.count()")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Place.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric())
+            self.assertGreater(int(output), -1)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Amenity.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric())
+            self.assertGreater(int(output), -1)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.count()")
+            output = f.getvalue()[:-1]
+            self.assertTrue(output.isnumeric())
+            self.assertGreater(int(output), -1)
+
+    def test_advanced_show(self):
+        """Tests advanced show command <class_name>.show()"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.show('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("State.show('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.show('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.show('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+    def test_advanced_destroy(self):
+        """Tests advanced destroy command <class_name>.destroy()"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("State.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Place.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Amenity.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.destroy('78786-78787')")
+            output = f.getvalue()[:-1]
+            self.assertEqual(output, "** no instance found **")
+
+    def test_advanced_update(self):
+        """Tests advancec update command <class_name>.update('id')"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"BaseModel.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"BaseModel.update({output}, {{'sex': 'M'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("State.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"State.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"State.update({output}, {{'sex': 'male'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("City.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"City.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"City.update({output}, {{'sex': 'male'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Amenity.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"Amenity.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Amenity.update({output}, {{'sex': 'M'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("Review.create()")
+            output = '"' + f.getvalue()[:-1] + '"'
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            _dict = {'name': 'jay', 'age': 2, 'pet': 'dog', 'car': 'dodge'}
+            HBNBCommand().onecmd(f"Review.update({output}, {_dict})")
+            out = f.getvalue()[:-1]
+            self.assertTrue(len(out) == 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"Review.update({output}, {{'sex': 'male'}})")
+            out = f.getvalue()[:-1]
+            self.assertEqual('', out)
+
     def test_advanced(self):
         """Tests advanced commands (example: User.destroy("78787-88678")"""
         with patch('sys.stdout', new=StringIO()) as f:
