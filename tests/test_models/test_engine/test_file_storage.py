@@ -24,4 +24,11 @@ class TestFileStorage(TestCase):
         """Tests FileStorage class attributes"""
         f = FileStorage()
         self.assertTrue(type(f.objects) is dict)
-        self.assertEqual(f.save(), None)
+        b = BaseModel()
+        temp = f'BaseModel.{b.id}'
+        f.save()
+        del b
+        del f
+        f = FileStorage()
+        f.reload()
+        self.assertTrue(temp in f.all())
