@@ -77,11 +77,13 @@ button:hover {
 }
 .locations h4:hover + .popover {
 	opacity: 100%;
-	transition: 0.5s ease-in-out;
+	transition: 0.25s ease-in-out;
 	position: relative;
+	z-index: 2;
 }
 .amenities h4:hover + .popover {
 	opacity: 100%;
-	transition: 0.5s ease-in-out;
+	transition: 0.25s ease-in-out;
 	position: relative;
+	z-index: 2;
 }
