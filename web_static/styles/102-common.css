@@ -1,0 +1,40 @@
+/*
+=============================================
+Body
+=============================================
+*/
+@media (max-width: 768px) {
+	body {
+		overflow-x: hidden;
+	}
+	.container {
+		width: 93%;
+	}
+	.locations {
+		padding-right: 10%;
+	}
+	.amenities .popover,
+	.locations .popover {
+		padding-right: 40%;
+	}
+	.locations .popover ul li {
+		margin-left: -15%;
+	}
+	.popover,
+	.filters .popover h2 {
+		font-size: 95%;
+	}
+}
+
+body {
+	color: #484848;
+	font: 14px Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.container {
+	max-width: 1000px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%)
+}
