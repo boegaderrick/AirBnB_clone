@@ -1,1 +1,1 @@
-# AirBnB Clone Static Front-End
+# Static AirBnB Clone Front-End
